@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal UPJK PTSB</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f8f7f5;
+    min-height: 100vh;
+  }
+
+  /* Top bar */
+  .topbar {
+    background: #1a1008;
+    padding: 0 40px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .topbar-q {
+    width: 28px; height: 28px;
+    background: #cc0001;
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; color: white;
+    letter-spacing: -0.3px;
+  }
+
+  .topbar-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .topbar-right {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.04em;
+  }
+
+  /* Hero header */
+  .hero {
+    background: #1a1008;
+    padding: 44px 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(204,0,1,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(204,0,1,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(204,0,1,0.5), transparent);
+  }
+
+  .hero-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(204,0,1,0.15);
+    border: 1px solid rgba(204,0,1,0.3);
+    border-radius: 3px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(204,0,1,0.9);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .hero-label span {
+    width: 5px; height: 5px;
+    background: #cc0001;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .hero-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: #f5f0e8;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: rgba(245,240,232,0.6);
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  /* Main content */
+  .main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 36px 40px 60px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .section-label-text {
+    font-size: 11px;
+    font-weight: 500;
+    color: #999;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: #e8e4de;
+  }
+
+  /* Loading */
+  .loading-wrap {
+    text-align: center;
+    padding: 80px 20px;
+    color: #bbb;
+    font-size: 13px;
+  }
+
+  .spinner {
+    width: 24px; height: 24px;
+    border: 2px solid #eee;
+    border-top-color: #cc0001;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin: 0 auto 14px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Error */
+  .error-wrap {
+    display: none;
+    background: #fff5f5;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: #dc2626;
+    text-align: center;
+  }
+
+  /* Portal grid */
+  .portal-grid {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2px;
+    background: #e8e4de;
+    border: 1px solid #e8e4de;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  /* Category card */
+  .cat-card {
+    background: #ffffff;
+    padding: 24px 22px 20px;
+    animation: fadeUp 0.4s ease both;
+    transition: background 0.15s;
+  }
+
+  .cat-card:hover { background: #fdfcfb; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .cat-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f0ede8;
+  }
+
+  .cat-num {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px;
+    color: #cc0001;
+    font-weight: 400;
+    padding-top: 2px;
+    min-width: 18px;
+    opacity: 0.7;
+  }
+
+  .cat-info { flex: 1; }
+
+  .cat-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a1008;
+    margin-bottom: 2px;
+    letter-spacing: -0.01em;
+  }
+
+  .cat-count {
+    font-size: 11px;
+    color: #bbb;
+  }
+
+  /* Direct link */
+  .direct-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: #1a1008;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #f5f0e8;
+    text-decoration: none;
+    transition: background 0.15s;
+    gap: 8px;
+  }
+
+  .direct-link:hover { background: #cc0001; }
+
+  .direct-link svg {
+    width: 14px; height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  /* Subpage links */
+  .sub-links { display: flex; flex-direction: column; gap: 2px; }
+
+  .sub-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #444;
+    text-decoration: none;
+    transition: background 0.12s, color 0.12s;
+    border: 1px solid transparent;
+  }
+
+  .sub-link:hover {
+    background: #fff5f5;
+    color: #cc0001;
+    border-color: rgba(204,0,1,0.12);
+  }
+
+  .sub-link-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sub-dot {
+    width: 4px; height: 4px;
+    background: #ddd;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: background 0.12s;
+  }
+
+  .sub-link:hover .sub-dot { background: #cc0001; }
+
+  .sub-link svg {
+    width: 12px; height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    opacity: 0;
+    transition: opacity 0.12s;
+    flex-shrink: 0;
+  }
+
+  .sub-link:hover svg { opacity: 0.5; }
+
+  /* Footer */
+  .footer {
+    background: #1a1008;
+    padding: 20px 40px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.04em;
+  }
+
+  .footer span { color: rgba(204,0,1,0.5); margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-q">Q</div>
+    <div class="topbar-name">Unit Pengurusan Jaminan Kualiti</div>
+  </div>
+  <div class="topbar-right">Politeknik Tuanku Sultanah Bahiyah</div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label"><span></span>Portal Dalaman</div>
+    <div class="hero-title">Portal UPJK <em>PTSB</em></div>
+    <div class="hero-sub">Pilih kategori untuk akses dokumen, borang dan maklumat unit</div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+  <div class="section-header">
+    <div class="section-label-text">Navigasi Portal</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="loading-wrap" id="loadingWrap">
+    <div class="spinner"></div>
+    Memuatkan portal...
+  </div>
+
+  <div class="error-wrap" id="errorWrap">
+    ⚠ Gagal memuatkan data. Pastikan Google Sheet dikongsi secara awam (Anyone with the link → Viewer).
+  </div>
+
+  <div class="portal-grid" id="portalGrid"></div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  © 2024 UPJK Politeknik Tuanku Sultanah Bahiyah
+  <span>·</span>
+  Sistem Pengurusan Kualiti
+</div>
+
+<script>
+  // ==============================================
+  // TETAPAN
+  // ==============================================
+  const SHEET_ID   = "1oxspFsGkCcLgedyOeenF1OKTB3eWhJCIh3TYus7EbwE";
+  const SHEET_NAME = "Sheet1";
+  // ==============================================
+
+  const ARROW_SVG = `<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
+
+  async function loadPortal() {
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+    try {
+      const res  = await fetch(url);
+      const text = await res.text();
+      const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+      const rows = json.table.rows;
+
+      // Skip row pertama jika ia header (kategori = "kategori")
+      const data = rows
+        .map(r => ({
+          kategori: r.c[0]?.v?.toString().trim() || "",
+          nama:     r.c[1]?.v?.toString().trim() || "",
+          url:      r.c[2]?.v?.toString().trim() || "#",
+        }))
+        .filter(r => r.kategori && r.nama && r.kategori.toLowerCase() !== "kategori");
+
+      // Group by kategori
+      const order  = [];
+      const groups = {};
+      data.forEach(r => {
+        if (!groups[r.kategori]) { groups[r.kategori] = []; order.push(r.kategori); }
+        groups[r.kategori].push({ nama: r.nama, url: r.url });
+      });
+
+      renderPortal(order, groups);
+    } catch (err) {
+      document.getElementById('loadingWrap').style.display = 'none';
+      document.getElementById('errorWrap').style.display  = 'block';
+      console.error(err);
+    }
+  }
+
+  function renderPortal(order, groups) {
+    const grid = document.getElementById('portalGrid');
+    grid.innerHTML = '';
+
+    order.forEach((kat, i) => {
+      const items = groups[kat];
+      const isDirect = items.length === 1 && items[0].nama.toLowerCase() === kat.toLowerCase();
+      const card = document.createElement('div');
+      card.className = 'cat-card';
+      card.style.animationDelay = (i * 0.07) + 's';
+
+      // Header
+      card.innerHTML = `
+        <div class="cat-header">
+          <div class="cat-num">0${i + 1}</div>
+          <div class="cat-info">
+            <div class="cat-title">${kat}</div>
+            <div class="cat-count">${isDirect ? 'Pautan terus' : items.length + ' item'}</div>
+          </div>
+        </div>`;
+
+      if (isDirect) {
+        const a = document.createElement('a');
+        a.className = 'direct-link';
+        a.href = items[0].url;
+        a.target = '_blank';
+        a.innerHTML = `<span>Buka ${kat}</span>${ARROW_SVG}`;
+        card.appendChild(a);
+      } else {
+        const wrap = document.createElement('div');
+        wrap.className = 'sub-links';
+        items.forEach(item => {
+          const a = document.createElement('a');
+          a.className = 'sub-link';
+          a.href = item.url;
+          a.target = '_blank';
+          a.innerHTML = `
+            <div class="sub-link-left">
+              <div class="sub-dot"></div>
+              <span>${item.nama}</span>
+            </div>
+            ${ARROW_SVG}`;
+          wrap.appendChild(a);
+        });
+        card.appendChild(wrap);
+      }
+
+      grid.appendChild(card);
+    });
+
+    document.getElementById('loadingWrap').style.display = 'none';
+    grid.style.display = 'grid';
+  }
+
+  loadPortal();
+</script>
+</body>
+</html>
