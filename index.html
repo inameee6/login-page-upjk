@@ -3,250 +3,233 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Log Masuk</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Log Masuk — UPJK PTSB</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: #0f0e0c;
+    font-family: 'Inter', sans-serif;
+    background: #f5f6f8;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
   }
 
-  /* Animated background grid */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(212,175,55,0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(212,175,55,0.06) 1px, transparent 1px);
-    background-size: 40px 40px;
-    animation: gridShift 20s linear infinite;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(212,175,55,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  @keyframes gridShift {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(40px, 40px); }
-  }
-
-  .container {
-    position: relative;
-    z-index: 1;
+  .wrapper {
     width: 100%;
     max-width: 420px;
     padding: 20px;
-    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: fadeUp 0.5s ease both;
   }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
+    from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* Top label */
-  .eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 28px;
+  .header {
+    text-align: center;
+    margin-bottom: 24px;
   }
 
-  .eyebrow-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4));
-  }
-
-  .eyebrow-line.right {
-    background: linear-gradient(90deg, rgba(212,175,55,0.4), transparent);
-  }
-
-  .eyebrow-text {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    color: rgba(212,175,55,0.7);
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  /* Card */
-  .card {
-    background: rgba(20, 18, 14, 0.92);
-    border: 1px solid rgba(212,175,55,0.18);
-    border-radius: 4px;
-    padding: 44px 40px 40px;
-    backdrop-filter: blur(12px);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
-  }
-
-  /* Corner accents */
-  .corner {
-    position: absolute;
-    width: 16px; height: 16px;
-    border-color: rgba(212,175,55,0.5);
-    border-style: solid;
-  }
-  .corner.tl { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
-  .corner.tr { top: 10px; right: 10px; border-width: 1px 1px 0 0; }
-  .corner.bl { bottom: 10px; left: 10px; border-width: 0 0 1px 1px; }
-  .corner.br { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
-
-  /* Lock icon */
-  .icon-wrap {
+  .logo-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 52px; height: 52px;
-    border: 1px solid rgba(212,175,55,0.25);
-    border-radius: 4px;
-    margin: 0 auto 24px;
-    position: relative;
+    gap: 12px;
+    margin-bottom: 10px;
   }
 
-  .icon-wrap svg {
-    width: 24px; height: 24px;
-    stroke: #d4af37;
-    fill: none;
-    stroke-width: 1.5;
+  .logo-icon {
+    width: 48px;
+    height: 48px;
+    background: #cc0001;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 28px;
+  .logo-icon span {
+    font-size: 26px;
+    font-weight: 700;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    line-height: 1;
+  }
+
+  .logo-text { text-align: left; }
+
+  .logo-text .org {
+    font-size: 18px;
+    font-weight: 600;
+    color: #cc0001;
+    line-height: 1.2;
+  }
+
+  .logo-text .sub {
+    font-size: 11px;
+    color: #888;
     font-weight: 400;
-    color: #f0e6c8;
-    text-align: center;
-    margin-bottom: 6px;
-    letter-spacing: -0.01em;
-  }
-
-  .subtitle {
-    font-size: 13px;
-    color: rgba(240,230,200,0.45);
-    text-align: center;
-    margin-bottom: 36px;
     letter-spacing: 0.02em;
   }
 
-  /* Form */
-  .field { margin-bottom: 20px; }
+  .divider-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 4px 0 0;
+  }
+
+  .divider-line hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .divider-line span {
+    font-size: 10px;
+    color: #bbb;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 36px 36px 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+  }
+
+  .card-sub {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 28px;
+  }
+
+  .accent-bar {
+    width: 36px;
+    height: 3px;
+    background: #cc0001;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  .field { margin-bottom: 18px; }
 
   label {
     display: block;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(212,175,55,0.7);
-    margin-bottom: 8px;
+    font-size: 12px;
     font-weight: 500;
+    color: #555;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
   }
 
-  input[type="password"], input[type="text"] {
+  .input-wrap { position: relative; }
+
+  input[type="text"], input[type="password"] {
     width: 100%;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(212,175,55,0.18);
-    border-radius: 3px;
-    padding: 13px 16px;
-    font-family: 'DM Sans', sans-serif;
+    padding: 11px 40px 11px 40px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
-    color: #f0e6c8;
-    letter-spacing: 0.04em;
+    color: #1a1a1a;
+    background: #fafafa;
     outline: none;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   }
 
   input:focus {
-    border-color: rgba(212,175,55,0.6);
-    background: rgba(212,175,55,0.05);
+    border-color: #cc0001;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(204,0,1,0.08);
   }
 
-  input::placeholder { color: rgba(240,230,200,0.2); }
+  input::placeholder { color: #bbb; }
 
-  /* Show password toggle */
-  .input-wrap { position: relative; }
+  .input-icon {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ccc;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .input-icon svg {
+    width: 16px; height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+  }
 
   .toggle-pw {
     position: absolute;
-    right: 14px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
     cursor: pointer;
-    color: rgba(212,175,55,0.5);
-    padding: 4px;
+    color: #bbb;
+    padding: 2px;
     transition: color 0.2s;
+    display: flex;
+    align-items: center;
   }
-  .toggle-pw:hover { color: rgba(212,175,55,0.9); }
-  .toggle-pw svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
-  /* Error */
+  .toggle-pw:hover { color: #888; }
+  .toggle-pw svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
   .error-msg {
     display: none;
-    background: rgba(220, 60, 60, 0.12);
-    border: 1px solid rgba(220,60,60,0.3);
-    border-radius: 3px;
+    background: #fff5f5;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
     padding: 10px 14px;
     font-size: 13px;
-    color: #e88;
-    margin-bottom: 18px;
-    text-align: center;
-    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+    color: #dc2626;
+    margin-bottom: 16px;
+    align-items: center;
+    gap: 8px;
   }
 
-  @keyframes shake {
-    10%, 90% { transform: translateX(-2px); }
-    20%, 80% { transform: translateX(3px); }
-    30%, 50%, 70% { transform: translateX(-4px); }
-    40%, 60% { transform: translateX(4px); }
-  }
+  .error-msg svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
 
-  /* Button */
   button[type="submit"] {
     width: 100%;
-    padding: 14px;
-    background: rgba(212,175,55,0.12);
-    border: 1px solid rgba(212,175,55,0.45);
-    border-radius: 3px;
-    color: #d4af37;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    padding: 12px;
+    background: #cc0001;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, transform 0.1s;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
     position: relative;
-    overflow: hidden;
     margin-top: 4px;
+    letter-spacing: 0.01em;
   }
 
   button[type="submit"]:hover {
-    background: rgba(212,175,55,0.22);
-    border-color: rgba(212,175,55,0.7);
+    background: #a80001;
+    box-shadow: 0 4px 12px rgba(204,0,1,0.25);
   }
 
   button[type="submit"]:active { transform: scale(0.99); }
@@ -262,36 +245,40 @@
     top: 50%; left: 50%;
     width: 18px; height: 18px;
     margin: -9px 0 0 -9px;
-    border: 2px solid rgba(212,175,55,0.3);
-    border-top-color: #d4af37;
+    border: 2.5px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
   }
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Footer */
-  .footer-note {
-    font-size: 12px;
-    color: rgba(240,230,200,0.25);
+  .card-footer {
     text-align: center;
-    margin-top: 28px;
-    letter-spacing: 0.03em;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #bbb;
+    line-height: 1.6;
   }
 
-  /* SUCCESS STATE */
+  .card-footer a {
+    color: #cc0001;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
   .success-overlay {
     display: none;
     position: absolute;
     inset: 0;
-    background: rgba(20,18,14,0.97);
-    border-radius: 4px;
+    background: rgba(255,255,255,0.97);
+    border-radius: 14px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     z-index: 10;
-    animation: fadeIn 0.4s ease both;
+    animation: fadeIn 0.3s ease both;
   }
 
   .success-overlay.show { display: flex; }
@@ -299,98 +286,114 @@
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
   .check-circle {
-    width: 60px; height: 60px;
-    border: 1px solid rgba(100, 200, 120, 0.4);
+    width: 56px; height: 56px;
+    background: #f0fdf4;
+    border: 1.5px solid #bbf7d0;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
   }
 
   .check-circle svg {
-    width: 28px; height: 28px;
-    stroke: #6dc87a;
+    width: 26px; height: 26px;
+    stroke: #16a34a;
     fill: none;
-    stroke-width: 1.5;
+    stroke-width: 2;
     stroke-dasharray: 50;
     stroke-dashoffset: 50;
-    animation: drawCheck 0.5s 0.1s ease forwards;
+    animation: drawCheck 0.4s 0.1s ease forwards;
   }
 
   @keyframes drawCheck { to { stroke-dashoffset: 0; } }
 
-  .success-text {
-    font-family: 'DM Serif Display', serif;
-    font-size: 20px;
-    color: #f0e6c8;
+  .success-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
   }
 
   .success-sub {
     font-size: 13px;
-    color: rgba(240,230,200,0.4);
+    color: #888;
   }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="eyebrow">
-    <div class="eyebrow-line"></div>
-    <span class="eyebrow-text">Kawasan Terhad</span>
-    <div class="eyebrow-line right"></div>
+<div class="wrapper">
+
+  <div class="header">
+    <div class="logo-row">
+      <div class="logo-icon">
+        <span>Q</span>
+      </div>
+      <div class="logo-text">
+        <div class="org">UPJK PTSB</div>
+        <div class="sub">Unit Pengurusan Jaminan Kualiti</div>
+        <div class="sub">Politeknik Tuanku Sultanah Bahiyah</div>
+      </div>
+    </div>
+    <div class="divider-line">
+      <hr><span>Sistem Log Masuk</span><hr>
+    </div>
   </div>
 
-  <div class="card">
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+  <div class="card" style="position:relative; overflow:hidden;">
 
-    <!-- SUCCESS OVERLAY -->
     <div class="success-overlay" id="successOverlay">
       <div class="check-circle">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <div class="success-text">Akses Dibenarkan</div>
-      <div class="success-sub">Mengalihkan...</div>
+      <div class="success-title">Akses Dibenarkan</div>
+      <div class="success-sub">Mengalihkan ke portal...</div>
     </div>
 
-    <!-- Lock icon -->
-    <div class="icon-wrap">
-      <svg viewBox="0 0 24 24">
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-      </svg>
-    </div>
+    <div class="card-title">Selamat Datang</div>
+    <div class="card-sub">Sila log masuk untuk meneruskan</div>
+    <div class="accent-bar"></div>
 
-    <h1>Log Masuk</h1>
-    <p class="subtitle">Masukkan kata laluan untuk teruskan</p>
-
-    <div id="errorMsg" class="error-msg">
-      ✕ &nbsp;Kata laluan tidak betul. Cuba sekali lagi.
+    <div class="error-msg" id="errorMsg">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="errorText">Nama pengguna atau kata laluan tidak betul.</span>
     </div>
 
     <form id="loginForm" onsubmit="handleLogin(event)">
+
       <div class="field">
         <label for="username">Nama Pengguna</label>
-        <input type="text" id="username" placeholder="Masukkan nama pengguna" autocomplete="username" />
+        <div class="input-wrap">
+          <span class="input-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
+          <input type="text" id="username" placeholder="Masukkan nama pengguna" autocomplete="username" />
+        </div>
       </div>
 
       <div class="field">
         <label for="password">Kata Laluan</label>
         <div class="input-wrap">
-          <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" />
+          <span class="input-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <input type="password" id="password" placeholder="Masukkan kata laluan" autocomplete="current-password" />
           <button type="button" class="toggle-pw" onclick="togglePw()" aria-label="Tunjuk/sorok kata laluan">
             <svg id="eyeIcon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
         </div>
       </div>
 
-      <div id="errorMsg2" class="error-msg"></div>
-
-      <button type="submit" id="submitBtn">Masuk</button>
+      <button type="submit" id="submitBtn">Log Masuk</button>
     </form>
 
-    <p class="footer-note">Hubungi pentadbir jika terlupa kata laluan</p>
+    <div class="card-footer">
+      Terlupa kata laluan? Hubungi<br>
+      <a href="mailto:upjk@ptsb.edu.my">upjk@ptsb.edu.my</a>
+    </div>
   </div>
+
+  <p style="text-align:center; font-size:11px; color:#ccc; margin-top:20px;">
+    © 2024 UPJK Politeknik Tuanku Sultanah Bahiyah
+  </p>
+
 </div>
 
 <script>
@@ -398,69 +401,39 @@
   // TETAPAN — UBAH DI SINI
   // ==============================================
   const CREDENTIALS = [
-    { username: "stafjka",    password: "jka@ptsb" },
-    { username: "stafjke", password: "jke@ptsb" },
-     { username: "stafjkm",    password: "jkm@ptsb" },
-    { username: "stafjp", password: "jp@ptsb" },
-     { username: "stafjpa",    password: "jpa@ptsb" },
-    { username: "stafjmsk", password: "jmsk@ptsb" },
-     { username: "stafsokongan",    password: "sokongan@ptsb" },
-    // Tambah lebih banyak pengguna di sini:
-    // { username: "nama",  password: "kata-laluan" },
+    { username: "stafjka",      password: "jka@ptsb" },
+    { username: "stafjke",      password: "jke@ptsb" },
+    { username: "stafjkm",      password: "jkm@ptsb" },
+    { username: "stafjp",       password: "jp@ptsb" },
+    { username: "stafjpa",      password: "jpa@ptsb" },
+    { username: "stafjmsk",     password: "jmsk@ptsb" },
+    { username: "stafsokongan", password: "sokongan@ptsb" },
   ];
 
-  // URL yang dibuka selepas login berjaya
   const REDIRECT_URL = "https://sites.google.com/ptsb.edu.my/upjk-ptsb";
   // ==============================================
-
-  let attempts = 0;
-  const MAX_ATTEMPTS = 5;
 
   function handleLogin(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
-    const err = document.getElementById('errorMsg');
+    const errBox = document.getElementById('errorMsg');
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value;
 
-    if (attempts >= MAX_ATTEMPTS) {
-      showError("Terlalu banyak cubaan. Sila muat semula halaman.");
-      return;
-    }
-
     btn.classList.add('loading');
-    err.style.display = 'none';
+    errBox.style.display = 'none';
 
-    // Simulate slight delay for UX
     setTimeout(() => {
-      const match = CREDENTIALS.find(
-        c => c.username === username && c.password === password
-      );
-
+      const match = CREDENTIALS.find(c => c.username === username && c.password === password);
       if (match) {
         document.getElementById('successOverlay').classList.add('show');
-        setTimeout(() => {
-          window.open(REDIRECT_URL, '_blank');
-        }, 1800);
+        setTimeout(() => { window.open(REDIRECT_URL, '_blank'); }, 1800);
       } else {
-        attempts++;
         btn.classList.remove('loading');
-        showError(
-          attempts >= MAX_ATTEMPTS
-            ? "Akaun dikunci. Sila muat semula halaman."
-            : `Nama pengguna atau kata laluan tidak betul. (${MAX_ATTEMPTS - attempts} cubaan tinggal)`
-        );
+        errBox.style.display = 'flex';
+        document.getElementById('errorText').textContent = 'Nama pengguna atau kata laluan tidak betul. Sila cuba semula.';
       }
-    }, 700);
-  }
-
-  function showError(msg) {
-    const err = document.getElementById('errorMsg');
-    err.textContent = '✕   ' + msg;
-    err.style.display = 'block';
-    err.style.animation = 'none';
-    void err.offsetWidth;
-    err.style.animation = 'shake 0.4s cubic-bezier(.36,.07,.19,.97) both';
+    }, 600);
   }
 
   function togglePw() {
