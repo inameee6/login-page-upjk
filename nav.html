@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nav UPJK PTSB</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar {
+    background: #1a1008;
+    padding: 0 20px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    border-bottom: 2px solid #cc0001;
+  }
+
+  /* Logo */
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .logo-q {
+    width: 26px; height: 26px;
+    background: #cc0001;
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; color: white;
+  }
+
+  .logo-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  /* Nav links */
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .nav-item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 12px;
+    height: 100%;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+    white-space: nowrap;
+    border: none;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-link:hover {
+    color: white;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .nav-link svg {
+    width: 10px; height: 10px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .nav-item.open .nav-link svg {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown */
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #1a1008;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-top: 2px solid #cc0001;
+    border-radius: 0 0 8px 8px;
+    min-width: 200px;
+    padding: 6px 0;
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  .nav-item.open .dropdown {
+    display: block;
+    animation: dropDown 0.15s ease both;
+  }
+
+  @keyframes dropDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 16px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: background 0.12s, color 0.12s;
+    white-space: nowrap;
+  }
+
+  .dropdown-link:hover {
+    background: rgba(204,0,1,0.15);
+    color: white;
+  }
+
+  .dropdown-dot {
+    width: 4px; height: 4px;
+    background: #cc0001;
+    border-radius: 50%;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  .dropdown-link:hover .dropdown-dot { opacity: 1; }
+
+  /* Right side — logout */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #cc0001;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    transition: background 0.15s;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .logout-btn:hover { background: #a80001; }
+
+  .logout-btn svg {
+    width: 12px; height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+  }
+
+  /* Loading */
+  .nav-loading {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    padding: 0 12px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <!-- Logo -->
+  <a class="nav-logo" href="https://inameee6.github.io/login-page-upjk/portal-v2.html" target="_top">
+    <div class="logo-q">Q</div>
+    <div class="logo-name">UPJK PTSB</div>
+  </a>
+
+  <!-- Nav links -->
+  <div class="nav-links" id="navLinks">
+    <span class="nav-loading">Memuatkan...</span>
+  </div>
+
+  <!-- Logout -->
+  <div class="nav-right">
+    <a class="logout-btn" href="https://inameee6.github.io/login-page-upjk/" target="_top">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Log Keluar
+    </a>
+  </div>
+</nav>
+
+<script>
+  // ==============================================
+  // TETAPAN
+  // ==============================================
+  const SHEET_ID   = "1oxspFsGkCcLgedyOeenF1OKTB3eWhJCIh3TYus7EbwE";
+  const SHEET_NAME = "Sheet1";
+  // ==============================================
+
+  async function loadNav() {
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+    try {
+      const res  = await fetch(url);
+      const text = await res.text();
+      const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+      const rows = json.table.rows;
+
+      const data = rows
+        .map(r => ({
+          kategori: r.c[0]?.v?.toString().trim() || "",
+          nama:     r.c[1]?.v?.toString().trim() || "",
+          url:      r.c[2]?.v?.toString().trim() || "#",
+        }))
+        .filter(r => r.kategori && r.nama && r.kategori.toLowerCase() !== "kategori");
+
+      // Group by kategori
+      const order  = [];
+      const groups = {};
+      data.forEach(r => {
+        if (!groups[r.kategori]) { groups[r.kategori] = []; order.push(r.kategori); }
+        groups[r.kategori].push({ nama: r.nama, url: r.url });
+      });
+
+      renderNav(order, groups);
+    } catch (err) {
+      document.getElementById('navLinks').innerHTML =
+        '<span class="nav-loading">Gagal memuatkan</span>';
+    }
+  }
+
+  function renderNav(order, groups) {
+    const container = document.getElementById('navLinks');
+    container.innerHTML = '';
+
+    order.forEach(kat => {
+      const items = groups[kat];
+      const isDirect = items.length === 1 && items[0].nama.toLowerCase() === kat.toLowerCase();
+      const item = document.createElement('div');
+      item.className = 'nav-item';
+
+      if (isDirect) {
+        // Direct link — no dropdown
+        const a = document.createElement('a');
+        a.className = 'nav-link';
+        a.href = items[0].url;
+        a.target = '_top';
+        a.textContent = kat;
+        item.appendChild(a);
+      } else {
+        // Has subpages — dropdown
+        const btn = document.createElement('button');
+        btn.className = 'nav-link';
+        btn.innerHTML = `${kat} <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>`;
+        btn.onclick = (e) => {
+          e.stopPropagation();
+          // Close all others
+          document.querySelectorAll('.nav-item.open').forEach(el => {
+            if (el !== item) el.classList.remove('open');
+          });
+          item.classList.toggle('open');
+        };
+
+        const dropdown = document.createElement('div');
+        dropdown.className = 'dropdown';
+
+        items.forEach(sub => {
+          const a = document.createElement('a');
+          a.className = 'dropdown-link';
+          a.href = sub.url;
+          a.target = '_top';
+          a.innerHTML = `<span class="dropdown-dot"></span>${sub.nama}`;
+          dropdown.appendChild(a);
+        });
+
+        item.appendChild(btn);
+        item.appendChild(dropdown);
+      }
+
+      container.appendChild(item);
+    });
+
+    // Close dropdown bila klik luar
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item.open').forEach(el => el.classList.remove('open'));
+    });
+  }
+
+  loadNav();
+</script>
+</body>
+</html>
