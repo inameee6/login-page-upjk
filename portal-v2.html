@@ -62,28 +62,29 @@
   .logout-btn {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    background: rgba(204,0,1,0.15);
-    border: 1px solid rgba(204,0,1,0.35);
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 500;
-    color: rgba(204,0,1,0.9);
+    gap: 8px;
+    padding: 9px 20px;
+    background: #cc0001;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
     cursor: pointer;
     text-decoration: none;
     letter-spacing: 0.03em;
-    transition: background 0.15s, border-color 0.15s;
+    transition: background 0.15s, transform 0.1s;
     font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
   }
 
   .logout-btn:hover {
-    background: rgba(204,0,1,0.25);
-    border-color: rgba(204,0,1,0.6);
+    background: #a80001;
+    transform: scale(0.98);
   }
 
   .logout-btn svg {
-    width: 13px; height: 13px;
+    width: 15px; height: 15px;
     stroke: currentColor;
     fill: none;
     stroke-width: 2;
