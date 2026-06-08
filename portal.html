@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal UPJK PTSB</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #f5f6f8;
+    min-height: 100vh;
+    padding: 32px 20px 48px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .logo-q {
+    width: 40px; height: 40px;
+    background: #cc0001;
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700; color: white;
+    letter-spacing: -0.5px;
+  }
+
+  .header-org {
+    font-size: 17px;
+    font-weight: 600;
+    color: #cc0001;
+  }
+
+  .header-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: #999;
+  }
+
+  .header-bar {
+    width: 36px; height: 3px;
+    background: #cc0001;
+    border-radius: 2px;
+    margin: 12px auto 0;
+  }
+
+  /* Loading state */
+  .loading-wrap {
+    text-align: center;
+    padding: 60px 20px;
+    color: #bbb;
+    font-size: 14px;
+  }
+
+  .spinner {
+    width: 28px; height: 28px;
+    border: 2.5px solid #eee;
+    border-top-color: #cc0001;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin: 0 auto 14px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Error state */
+  .error-wrap {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    background: #fff5f5;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    font-size: 13px;
+    color: #dc2626;
+  }
+
+  /* Grid */
+  .portal-grid {
+    display: none;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* Category card */
+  .cat-card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 18px 16px;
+    border: 0.5px solid #eee;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    animation: fadeUp 0.5s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .cat-icon-wrap {
+    width: 38px; height: 38px;
+    background: #fff0f0;
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #cc0001;
+  }
+
+  .cat-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #f0f0f0;
+  }
+
+  /* Direct link card (Utama, Dokumen) */
+  .direct-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: #fafafa;
+    border: 0.5px solid #eee;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #444;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    margin-top: 4px;
+  }
+
+  .direct-link:hover {
+    background: #fff0f0;
+    border-color: #cc0001;
+    color: #cc0001;
+  }
+
+  .direct-link svg {
+    width: 14px; height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    flex-shrink: 0;
+  }
+
+  /* Subpage links */
+  .sub-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 7px;
+    font-size: 13px;
+    color: #555;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    margin-bottom: 4px;
+  }
+
+  .sub-link:last-child { margin-bottom: 0; }
+
+  .sub-link:hover {
+    background: #fff0f0;
+    color: #cc0001;
+  }
+
+  .sub-link svg {
+    width: 13px; height: 13px;
+    stroke: #cc0001;
+    fill: none;
+    stroke-width: 2.5;
+    flex-shrink: 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 11px;
+    color: #ccc;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-logo">
+    <div class="logo-q">Q</div>
+    <div class="header-org">UPJK PTSB</div>
+  </div>
+  <div class="header-title">Portal UPJK PTSB</div>
+  <div class="header-sub">Pilih kategori untuk akses dokumen dan maklumat</div>
+  <div class="header-bar"></div>
+</div>
+
+<!-- Loading -->
+<div class="loading-wrap" id="loadingWrap">
+  <div class="spinner"></div>
+  Memuatkan portal...
+</div>
+
+<!-- Error -->
+<div class="error-wrap" id="errorWrap">
+  ⚠ Gagal memuatkan data. Sila semak URL Google Sheet dan pastikan ia dikongsi secara awam.
+</div>
+
+<!-- Portal grid -->
+<div class="portal-grid" id="portalGrid"></div>
+
+<div class="footer">© 2024 Unit Pengurusan Jaminan Kualiti — Politeknik Tuanku Sultanah Bahiyah</div>
+
+<script>
+  // ==============================================
+  // TETAPAN — UBAH DI SINI
+  // ==============================================
+
+  // Langkah untuk dapatkan SHEET_ID:
+  // 1. Buka Google Sheet anda
+  // 2. Klik Share → tukar kepada "Anyone with the link can view"
+  // 3. Salin URL — ambil bahagian ID contoh:
+  //    https://docs.google.com/spreadsheets/d/XXXXX/edit
+  //    SHEET_ID = XXXXX
+  const SHEET_ID = "1oxspFsGkCcLgedyOeenF1OKTB3eWhJCIh3TYus7EbwE";
+
+  // Nama tab/sheet dalam Google Sheet (default: Sheet1)
+  const SHEET_NAME = "Sheet1";
+
+  // ==============================================
+
+  // Ikon mengikut kategori
+  const ICONS = {
+    "utama":      `<svg viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+    "pengenalan": `<svg viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+    "dokumen":    `<svg viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+    "borang":     `<svg viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="12" y2="16"/></svg>`,
+  };
+
+  // Arrow icon
+  const ARROW = `<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
+  const CHEVRON = `<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
+
+  async function loadPortal() {
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+    try {
+      const res = await fetch(url);
+      const text = await res.text();
+      const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+      const rows = json.table.rows;
+
+      // Parse data: col0=kategori, col1=nama, col2=url
+      const data = rows.map(r => ({
+        kategori: r.c[0]?.v?.toString().trim() || "",
+        nama:     r.c[1]?.v?.toString().trim() || "",
+        url:      r.c[2]?.v?.toString().trim() || "#",
+      })).filter(r => r.kategori && r.nama);
+
+      // Group by kategori — kekalkan urutan pertama muncul
+      const order = [];
+      const groups = {};
+      data.forEach(r => {
+        if (!groups[r.kategori]) {
+          groups[r.kategori] = [];
+          order.push(r.kategori);
+        }
+        groups[r.kategori].push({ nama: r.nama, url: r.url });
+      });
+
+      renderPortal(order, groups);
+
+    } catch (err) {
+      document.getElementById('loadingWrap').style.display = 'none';
+      document.getElementById('errorWrap').style.display = 'block';
+      console.error(err);
+    }
+  }
+
+  function getIcon(kategori) {
+    const key = kategori.toLowerCase();
+    for (const k in ICONS) {
+      if (key.includes(k)) return ICONS[k];
+    }
+    return ICONS["dokumen"];
+  }
+
+  function renderPortal(order, groups) {
+    const grid = document.getElementById('portalGrid');
+    grid.innerHTML = '';
+
+    order.forEach((kat, i) => {
+      const items = groups[kat];
+      const card = document.createElement('div');
+      card.className = 'cat-card';
+      card.style.animationDelay = (i * 0.08) + 's';
+
+      // Icon
+      const iconWrap = document.createElement('div');
+      iconWrap.className = 'cat-icon-wrap';
+      iconWrap.innerHTML = getIcon(kat);
+      card.appendChild(iconWrap);
+
+      // Title
+      const title = document.createElement('div');
+      title.className = 'cat-title';
+      title.textContent = kat;
+      card.appendChild(title);
+
+      // Links
+      if (items.length === 1 && items[0].nama.toLowerCase() === kat.toLowerCase()) {
+        // Direct link card
+        const a = document.createElement('a');
+        a.className = 'direct-link';
+        a.href = items[0].url;
+        a.target = '_blank';
+        a.innerHTML = `<span>Buka ${kat}</span>${ARROW}`;
+        card.appendChild(a);
+      } else {
+        // Subpage links
+        items.forEach(item => {
+          const a = document.createElement('a');
+          a.className = 'sub-link';
+          a.href = item.url;
+          a.target = '_blank';
+          a.innerHTML = `${CHEVRON}<span>${item.nama}</span>`;
+          card.appendChild(a);
+        });
+      }
+
+      grid.appendChild(card);
+    });
+
+    document.getElementById('loadingWrap').style.display = 'none';
+    grid.style.display = 'grid';
+  }
+
+  loadPortal();
+</script>
+</body>
+</html>
