@@ -48,9 +48,45 @@
   }
 
   .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .topbar-org {
     font-size: 11px;
     color: rgba(255,255,255,0.35);
     letter-spacing: 0.04em;
+  }
+
+  .logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(204,0,1,0.15);
+    border: 1px solid rgba(204,0,1,0.35);
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(204,0,1,0.9);
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: background 0.15s, border-color 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .logout-btn:hover {
+    background: rgba(204,0,1,0.25);
+    border-color: rgba(204,0,1,0.6);
+  }
+
+  .logout-btn svg {
+    width: 13px; height: 13px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
   }
 
   /* Hero header */
@@ -349,7 +385,13 @@
     <div class="topbar-q">Q</div>
     <div class="topbar-name">Unit Pengurusan Jaminan Kualiti</div>
   </div>
-  <div class="topbar-right">Politeknik Tuanku Sultanah Bahiyah</div>
+  <div class="topbar-right">
+    <div class="topbar-org">Politeknik Tuanku Sultanah Bahiyah</div>
+    <a class="logout-btn" href="https://inameee6.github.io/login-page-upjk/" title="Log Keluar">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Log Keluar
+    </a>
+  </div>
 </div>
 
 <!-- Hero -->
