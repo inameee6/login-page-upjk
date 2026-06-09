@@ -427,13 +427,8 @@
       const match = CREDENTIALS.find(c => c.username === username && c.password === password);
       if (match) {
         document.getElementById('successOverlay').classList.add('show');
-        const portalTab = window.open(REDIRECT_URL, '_blank');
-        setTimeout(() => { 
-          if (!portalTab) {
-            // Kalau popup disekat, redirect dalam tab sama
-            window.top.location.href = REDIRECT_URL;
-          }
-          // Reset login page
+        setTimeout(() => {
+          window.open(REDIRECT_URL, '_blank');
           document.getElementById('successOverlay').classList.remove('show');
           document.getElementById('loginForm').reset();
           document.getElementById('submitBtn').classList.remove('loading');
