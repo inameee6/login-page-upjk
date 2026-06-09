@@ -427,7 +427,15 @@
       const match = CREDENTIALS.find(c => c.username === username && c.password === password);
       if (match) {
         document.getElementById('successOverlay').classList.add('show');
-        setTimeout(() => { window.top.location.href = REDIRECT_URL; }, 1800);
+        setTimeout(() => { 
+          window.open(REDIRECT_URL, '_blank');
+          // Reset login page selepas redirect
+          setTimeout(() => {
+            document.getElementById('successOverlay').classList.remove('show');
+            document.getElementById('loginForm').reset();
+            document.getElementById('submitBtn').classList.remove('loading');
+          }, 500);
+        }, 1800);
       } else {
         btn.classList.remove('loading');
         errBox.style.display = 'flex';
