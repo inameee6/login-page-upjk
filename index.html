@@ -391,7 +391,7 @@
   </div>
 
   <p style="text-align:center; font-size:11px; color:#ccc; margin-top:20px;">
-    © 2024 UPJK Politeknik Tuanku Sultanah Bahiyah
+    © <span id="tahun"></span> UPJK Politeknik Tuanku Sultanah Bahiyah
   </p>
 
 </div>
@@ -448,5 +448,6 @@
     }
   }
 </script>
+<script>document.getElementById('tahun').textContent = new Date().getFullYear();</script>
 </body>
 </html>
