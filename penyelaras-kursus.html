@@ -9,83 +9,90 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'DM Sans', sans-serif; background: #f8f7f5; min-height: 100vh; }
 
-    .hero { background: #1a1008; padding: 44px 40px 48px; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(204,0,1,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(204,0,1,0.06) 1px, transparent 1px); background-size: 32px 32px; pointer-events: none; }
-    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(204,0,1,0.5), transparent); }
-    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start; }
-    .hero-title { font-family: 'Libre Baskerville', serif; font-size: 34px; font-weight: 700; color: #f5f0e8; line-height: 1.2; margin-bottom: 10px; letter-spacing: -0.02em; }
-    .hero-title em { font-style: italic; color: rgba(245,240,232,0.6); }
-    .hero-sub { font-size: 14px; color: rgba(255,255,255,0.4); font-weight: 300; letter-spacing: 0.02em; }
-    .logout-btn { display: flex; align-items: center; gap: 8px; padding: 9px 20px; background: #cc0001; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; color: white; cursor: pointer; text-decoration: none; font-family: 'DM Sans', sans-serif; white-space: nowrap; flex-shrink: 0; margin-top: 6px; transition: background 0.15s; }
-    .logout-btn:hover { background: #a80001; }
-    .logout-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+    /* TOPBAR */
+    .topbar { background: #1a1008; padding: 0 40px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
+    .topbar-title { font-family: 'Libre Baskerville', serif; font-size: 18px; font-weight: 700; color: #f5f0e8; letter-spacing: -0.01em; }
+    .topbar-title em { font-style: italic; color: rgba(245,240,232,0.5); }
+    .back-btn { display: flex; align-items: center; gap: 8px; padding: 8px 18px; background: transparent; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.7); cursor: pointer; text-decoration: none; font-family: 'DM Sans', sans-serif; white-space: nowrap; transition: all 0.15s; }
+    .back-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); color: white; }
+    .back-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-    .main { max-width: 960px; margin: 0 auto; padding: 36px 40px 60px; }
+    /* BREADCRUMB */
+    .breadcrumb-bar { background: #fff; border-bottom: 1px solid #ede9e3; padding: 10px 40px; display: flex; align-items: center; gap: 6px; font-size: 12px; }
+    .breadcrumb-bar a { color: #cc0001; text-decoration: none; }
+    .breadcrumb-bar a:hover { text-decoration: underline; }
+    .breadcrumb-bar .sep { color: #ccc; }
+    .breadcrumb-bar .active { color: #555; font-weight: 500; }
 
-    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-bottom: 28px; }
-    .breadcrumb a { color: #cc0001; text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
-    .breadcrumb .sep { color: #ccc; }
-    .breadcrumb .active { color: #555; font-weight: 500; }
+    /* MAIN */
+    .main { max-width: 860px; margin: 32px auto; padding: 0 24px 60px; }
 
-    .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
-    .section-label-text { font-size: 11px; font-weight: 500; color: #999; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
-    .section-line { flex: 1; height: 1px; background: #e8e4de; }
+    /* CATEGORY HEADER CARD */
+    .cat-header-card { background: #1a1008; border-radius: 12px; padding: 22px 28px; display: flex; align-items: center; gap: 20px; margin-bottom: 28px; position: relative; overflow: hidden; }
+    .cat-header-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(204,0,1,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(204,0,1,0.05) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; }
+    .cat-icon { width: 52px; height: 52px; background: #cc0001; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 1; }
+    .cat-icon svg { width: 26px; height: 26px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .cat-header-text { position: relative; z-index: 1; }
+    .cat-header-text h1 { font-family: 'Libre Baskerville', serif; font-size: 22px; font-weight: 700; color: #f5f0e8; margin-bottom: 4px; }
+    .cat-header-text p { font-size: 13px; color: rgba(255,255,255,0.45); font-weight: 300; }
+    .cat-count-badge { margin-left: auto; background: rgba(204,0,1,0.25); border: 1px solid rgba(204,0,1,0.4); color: rgba(255,255,255,0.8); font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 20px; white-space: nowrap; position: relative; z-index: 1; }
 
-    .table-wrap { background: #fff; border-radius: 10px; border: 1px solid #e8e4de; overflow: hidden; }
-    .table-top { padding: 16px 24px; border-bottom: 1px solid #f0ede8; display: flex; align-items: center; justify-content: space-between; }
-    .table-top-title { font-size: 14px; font-weight: 500; color: #1a1008; }
-    .table-count { font-size: 12px; color: #bbb; }
+    /* FILE LIST */
+    .file-list { display: flex; flex-direction: column; gap: 8px; }
 
-    table { width: 100%; border-collapse: collapse; }
-    thead tr { background: #faf9f7; }
-    thead th { padding: 11px 20px; text-align: left; font-size: 11px; font-weight: 500; color: #999; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid #f0ede8; }
-    tbody tr { border-bottom: 1px solid #f7f5f2; transition: background 0.12s; }
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: #fdf9f9; }
-    tbody td { padding: 14px 20px; font-size: 14px; color: #333; vertical-align: middle; }
-    .td-no { color: #cc0001; font-size: 12px; font-family: 'Libre Baskerville', serif; width: 48px; opacity: 0.7; }
-    .td-name { font-weight: 400; color: #1a1008; }
-    .td-date { color: #aaa; font-size: 12px; white-space: nowrap; }
-    .td-action { text-align: right; white-space: nowrap; }
+    .file-item { background: #fff; border: 1px solid #ede9e3; border-radius: 10px; padding: 16px 20px; display: flex; align-items: center; gap: 16px; transition: border-color 0.15s, box-shadow 0.15s; }
+    .file-item:hover { border-color: rgba(204,0,1,0.25); box-shadow: 0 2px 8px rgba(204,0,1,0.06); }
 
-    .btn-buka { display: inline-flex; align-items: center; gap: 6px; background: #1a1008; color: #f5f0e8; padding: 7px 16px; border-radius: 6px; font-size: 12px; font-weight: 500; text-decoration: none; transition: background 0.15s; }
-    .btn-buka:hover { background: #cc0001; }
-    .btn-buka svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; opacity: 0.7; }
+    .file-icon { width: 40px; height: 40px; background: #fff5f5; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .file-icon svg { width: 20px; height: 20px; stroke: #cc0001; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
+    .file-info { flex: 1; min-width: 0; }
+    .file-name { font-size: 14px; font-weight: 500; color: #1a1008; margin-bottom: 3px; }
+    .file-meta { font-size: 12px; color: #aaa; }
+
+    .btn-muat { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #1a1008; color: #1a1008; padding: 8px 18px; border-radius: 7px; font-size: 12px; font-weight: 500; text-decoration: none; cursor: pointer; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; font-family: 'DM Sans', sans-serif; }
+    .btn-muat:hover { background: #1a1008; color: #f5f0e8; }
+    .btn-muat svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* LOADING / ERROR */
     .loading-wrap { text-align: center; padding: 60px 20px; color: #bbb; font-size: 13px; }
     .spinner { width: 22px; height: 22px; border: 2px solid #eee; border-top-color: #cc0001; border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 12px; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .error-wrap { display: none; background: #fff5f5; border: 1px solid #fecaca; border-radius: 8px; padding: 16px 20px; font-size: 13px; color: #dc2626; text-align: center; }
 
-    .footer { background: #1a1008; padding: 20px 40px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.04em; margin-top: 60px; }
+    /* FOOTER */
+    .footer { background: #1a1008; padding: 20px 40px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.04em; }
   </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div>
-      <div class="hero-title">Portal UPJK <em>PTSB</em></div>
-      <div class="hero-sub">Pilih kategori untuk akses dokumen, borang dan maklumat unit</div>
-    </div>
-    <a class="logout-btn" href="https://sites.google.com/ptsb.edu.my/upjk-ptsb/log-masuk">
-      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      Log Keluar
-    </a>
-  </div>
+<div class="topbar">
+  <div class="topbar-title">Portal UPJK <em>PTSB</em></div>
+  <a class="back-btn" href="portal-v2.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Kembali ke Portal
+  </a>
+</div>
+
+<div class="breadcrumb-bar">
+  <a href="portal-v2.html">Portal UPJK</a>
+  <span class="sep">›</span>
+  <span class="sep">Borang</span>
+  <span class="sep">›</span>
+  <span class="active">Penyelaras Kursus</span>
 </div>
 
 <div class="main">
-  <div class="breadcrumb">
-    <a href="portal-v2.html">Laman Utama</a>
-    <span class="sep">›</span>
-    <span class="active">Penyelaras Kursus</span>
-  </div>
 
-  <div class="section-header">
-    <div class="section-label-text">Borang Penyelaras Kursus</div>
-    <div class="section-line"></div>
+  <div class="cat-header-card">
+    <div class="cat-icon">
+      <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    </div>
+    <div class="cat-header-text">
+      <h1>Penyelaras Kursus</h1>
+      <p>Borang penyelarasan jadual, modul, penilaian dan aktiviti kursus</p>
+    </div>
+    <div class="cat-count-badge" id="countBadge">— borang</div>
   </div>
 
   <div class="loading-wrap" id="loadingWrap">
@@ -93,26 +100,8 @@
     Memuatkan senarai borang...
   </div>
   <div class="error-wrap" id="errorWrap">⚠ Gagal memuatkan data. Sila semak sambungan internet anda.</div>
+  <div class="file-list" id="fileList" style="display:none;"></div>
 
-  <div id="tableWrap" style="display:none;">
-    <div class="table-wrap">
-      <div class="table-top">
-        <div class="table-top-title">Senarai Borang</div>
-        <div class="table-count" id="countLabel"></div>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>No.</th>
-            <th>Nama Fail</th>
-            <th>Tarikh Kuatkuasa</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-      </table>
-    </div>
-  </div>
 </div>
 
 <div class="footer">Portal UPJK PTSB &copy; 2026</div>
@@ -121,7 +110,19 @@
   const SHEET_ID   = "1Pn4Nemmq8y6Gl4R_Di8HOiAQuQpT0juXID5VnwZYwyo";
   const SHEET_NAME = "Penyelaras Kursus";
 
-  const ARROW = `<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
+  const FILE_ICON = `<svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:#cc0001;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`;
+  const DL_ICON   = `<svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+
+  function formatDate(raw) {
+    if (!raw) return '';
+    // Handle Date(2026,0,8) format
+    const match = raw.toString().match(/Date\((\d+),(\d+),(\d+)\)/);
+    if (match) {
+      const months = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogos','Sep','Okt','Nov','Dis'];
+      return `${parseInt(match[3])} ${months[parseInt(match[2])]} ${match[1]}`;
+    }
+    return raw;
+  }
 
   async function load() {
     const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
@@ -131,33 +132,32 @@
       const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
       const rows = json.table.rows;
 
-      // Lajur: A=No, B=Kategori, C=Nama Fail, D=Tarikh, E=Catatan, F=Link
       const data = rows
         .map(r => ({
           nama:   r.c[2]?.v?.toString().trim() || "",
-          tarikh: r.c[3]?.v?.toString().trim() || "",
+          tarikh: formatDate(r.c[3]?.v),
           link:   r.c[5]?.v?.toString().trim() || "#",
         }))
         .filter(r => r.nama && r.nama.toLowerCase() !== "nama fail");
 
-      const tbody = document.getElementById('tableBody');
-      tbody.innerHTML = '';
-      data.forEach((item, i) => {
-        const num = String(i + 1).padStart(2, '0');
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="td-no">${num}</td>
-          <td class="td-name">${item.nama}</td>
-          <td class="td-date">${item.tarikh}</td>
-          <td class="td-action">
-            <a href="${item.link}" target="_blank" class="btn-buka">Buka ${ARROW}</a>
-          </td>`;
-        tbody.appendChild(tr);
+      const list = document.getElementById('fileList');
+      list.innerHTML = '';
+      data.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'file-item';
+        div.innerHTML = `
+          <div class="file-icon">${FILE_ICON}</div>
+          <div class="file-info">
+            <div class="file-name">${item.nama}</div>
+            <div class="file-meta">Tarikh kuatkuasa: ${item.tarikh}</div>
+          </div>
+          <a href="${item.link}" target="_blank" class="btn-muat">${DL_ICON} Muat Turun</a>`;
+        list.appendChild(div);
       });
 
-      document.getElementById('countLabel').textContent = data.length + ' borang';
+      document.getElementById('countBadge').textContent = data.length + ' borang';
       document.getElementById('loadingWrap').style.display = 'none';
-      document.getElementById('tableWrap').style.display = 'block';
+      list.style.display = 'flex';
     } catch(err) {
       document.getElementById('loadingWrap').style.display = 'none';
       document.getElementById('errorWrap').style.display = 'block';
