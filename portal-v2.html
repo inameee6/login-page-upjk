@@ -14,7 +14,6 @@
     min-height: 100vh;
   }
 
-  /* Top bar */
   .topbar {
     background: #1a1008;
     padding: 0 40px;
@@ -90,7 +89,6 @@
     stroke-width: 2;
   }
 
-  /* Hero header */
   .hero {
     background: #1a1008;
     padding: 44px 40px 48px;
@@ -169,7 +167,6 @@
     letter-spacing: 0.02em;
   }
 
-  /* Main content */
   .main {
     max-width: 960px;
     margin: 0 auto;
@@ -197,7 +194,6 @@
     background: #e8e4de;
   }
 
-  /* Loading */
   .loading-wrap {
     text-align: center;
     padding: 80px 20px;
@@ -216,7 +212,6 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Error */
   .error-wrap {
     display: none;
     background: #fff5f5;
@@ -228,7 +223,6 @@
     text-align: center;
   }
 
-  /* Portal grid */
   .portal-grid {
     display: none;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -239,7 +233,6 @@
     overflow: hidden;
   }
 
-  /* Category card */
   .cat-card {
     background: #ffffff;
     padding: 24px 22px 20px;
@@ -288,7 +281,6 @@
     color: #bbb;
   }
 
-  /* Direct link */
   .direct-link {
     display: flex;
     align-items: center;
@@ -315,7 +307,6 @@
     opacity: 0.7;
   }
 
-  /* Subpage links */
   .sub-links { display: flex; flex-direction: column; gap: 2px; }
 
   .sub-link {
@@ -365,7 +356,6 @@
 
   .sub-link:hover svg { opacity: 0.5; }
 
-  /* Footer */
   .footer {
     background: #1a1008;
     padding: 20px 40px;
@@ -380,7 +370,6 @@
 </head>
 <body>
 
-<!-- Hero -->
 <div class="hero">
   <div class="hero-inner">
     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
@@ -396,7 +385,6 @@
   </div>
 </div>
 
-<!-- Main -->
 <div class="main">
   <div class="section-header">
     <div class="section-label-text">Navigasi Portal</div>
@@ -415,14 +403,20 @@
   <div class="portal-grid" id="portalGrid"></div>
 </div>
 
-
-
 <script>
   // ==============================================
   // TETAPAN
   // ==============================================
   const SHEET_ID   = "1oxspFsGkCcLgedyOeenF1OKTB3eWhJCIh3TYus7EbwE";
   const SHEET_NAME = "Sheet1";
+
+  // Subpage tempatan — nama item (huruf kecil) → fail HTML
+  const LOCAL_PAGES = {
+    "pensyarah kursus":       "pensyarah-kursus.html",
+    "penyelaras kursus":      "penyelaras-kursus.html",
+    "penasihat akademik":     "penasihat-akademik.html",
+    "pegawai rekod jabatan":  "pegawai-rekod-jabatan.html",
+  };
   // ==============================================
 
   const ARROW_SVG = `<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
@@ -435,7 +429,6 @@
       const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
       const rows = json.table.rows;
 
-      // Skip row pertama jika ia header (kategori = "kategori")
       const data = rows
         .map(r => ({
           kategori: r.c[0]?.v?.toString().trim() || "",
@@ -444,7 +437,6 @@
         }))
         .filter(r => r.kategori && r.nama && r.kategori.toLowerCase() !== "kategori");
 
-      // Group by kategori
       const order  = [];
       const groups = {};
       data.forEach(r => {
@@ -471,7 +463,6 @@
       card.className = 'cat-card';
       card.style.animationDelay = (i * 0.07) + 's';
 
-      // Header
       card.innerHTML = `
         <div class="cat-header">
           <div class="cat-num">0${i + 1}</div>
@@ -494,8 +485,17 @@
         items.forEach(item => {
           const a = document.createElement('a');
           a.className = 'sub-link';
-          a.href = item.url;
-          a.target = '_blank';
+
+          // Semak sama ada item ini ada subpage tempatan
+          const localKey = item.nama.toLowerCase();
+          if (LOCAL_PAGES[localKey]) {
+            a.href = LOCAL_PAGES[localKey];
+            // Buka dalam tab sama (subpage portal)
+          } else {
+            a.href = item.url;
+            a.target = '_blank';
+          }
+
           a.innerHTML = `
             <div class="sub-link-left">
               <div class="sub-dot"></div>
