@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penasihat Akademik – Portal UPJK PTSB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #f8f7f5; min-height: 100vh; }
+
+    .hero { background: #1a1008; padding: 44px 40px 48px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(204,0,1,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(204,0,1,0.06) 1px, transparent 1px); background-size: 32px 32px; pointer-events: none; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(204,0,1,0.5), transparent); }
+    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start; }
+    .hero-title { font-family: 'Libre Baskerville', serif; font-size: 34px; font-weight: 700; color: #f5f0e8; line-height: 1.2; margin-bottom: 10px; letter-spacing: -0.02em; }
+    .hero-title em { font-style: italic; color: rgba(245,240,232,0.6); }
+    .hero-sub { font-size: 14px; color: rgba(255,255,255,0.4); font-weight: 300; letter-spacing: 0.02em; }
+    .logout-btn { display: flex; align-items: center; gap: 8px; padding: 9px 20px; background: #cc0001; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; color: white; cursor: pointer; text-decoration: none; font-family: 'DM Sans', sans-serif; white-space: nowrap; flex-shrink: 0; margin-top: 6px; transition: background 0.15s; }
+    .logout-btn:hover { background: #a80001; }
+    .logout-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    .main { max-width: 960px; margin: 0 auto; padding: 36px 40px 60px; }
+
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-bottom: 28px; }
+    .breadcrumb a { color: #cc0001; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb .sep { color: #ccc; }
+    .breadcrumb .active { color: #555; font-weight: 500; }
+
+    .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .section-label-text { font-size: 11px; font-weight: 500; color: #999; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+    .section-line { flex: 1; height: 1px; background: #e8e4de; }
+
+    .table-wrap { background: #fff; border-radius: 10px; border: 1px solid #e8e4de; overflow: hidden; }
+    .table-top { padding: 16px 24px; border-bottom: 1px solid #f0ede8; display: flex; align-items: center; justify-content: space-between; }
+    .table-top-title { font-size: 14px; font-weight: 500; color: #1a1008; }
+    .table-count { font-size: 12px; color: #bbb; }
+
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: #faf9f7; }
+    thead th { padding: 11px 20px; text-align: left; font-size: 11px; font-weight: 500; color: #999; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid #f0ede8; }
+    tbody tr { border-bottom: 1px solid #f7f5f2; transition: background 0.12s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #fdf9f9; }
+    tbody td { padding: 14px 20px; font-size: 14px; color: #333; vertical-align: middle; }
+    .td-no { color: #cc0001; font-size: 12px; font-family: 'Libre Baskerville', serif; width: 48px; opacity: 0.7; }
+    .td-name { font-weight: 400; color: #1a1008; }
+    .td-date { color: #aaa; font-size: 12px; white-space: nowrap; }
+    .td-action { text-align: right; white-space: nowrap; }
+
+    .btn-buka { display: inline-flex; align-items: center; gap: 6px; background: #1a1008; color: #f5f0e8; padding: 7px 16px; border-radius: 6px; font-size: 12px; font-weight: 500; text-decoration: none; transition: background 0.15s; }
+    .btn-buka:hover { background: #cc0001; }
+    .btn-buka svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; opacity: 0.7; }
+
+    .loading-wrap { text-align: center; padding: 60px 20px; color: #bbb; font-size: 13px; }
+    .spinner { width: 22px; height: 22px; border: 2px solid #eee; border-top-color: #cc0001; border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error-wrap { display: none; background: #fff5f5; border: 1px solid #fecaca; border-radius: 8px; padding: 16px 20px; font-size: 13px; color: #dc2626; text-align: center; }
+
+    .footer { background: #1a1008; padding: 20px 40px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.04em; margin-top: 60px; }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-title">Portal UPJK <em>PTSB</em></div>
+      <div class="hero-sub">Pilih kategori untuk akses dokumen, borang dan maklumat unit</div>
+    </div>
+    <a class="logout-btn" href="https://sites.google.com/ptsb.edu.my/upjk-ptsb/log-masuk">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Log Keluar
+    </a>
+  </div>
+</div>
+
+<div class="main">
+  <div class="breadcrumb">
+    <a href="portal-v2.html">Laman Utama</a>
+    <span class="sep">›</span>
+    <span class="active">Penasihat Akademik</span>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label-text">Borang Penasihat Akademik</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="loading-wrap" id="loadingWrap">
+    <div class="spinner"></div>
+    Memuatkan senarai borang...
+  </div>
+  <div class="error-wrap" id="errorWrap">⚠ Gagal memuatkan data. Sila semak sambungan internet anda.</div>
+
+  <div id="tableWrap" style="display:none;">
+    <div class="table-wrap">
+      <div class="table-top">
+        <div class="table-top-title">Senarai Borang</div>
+        <div class="table-count" id="countLabel"></div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Nama Fail</th>
+            <th>Tarikh Kuatkuasa</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Portal UPJK PTSB &copy; 2026</div>
+
+<script>
+  const SHEET_ID   = "1Pn4Nemmq8y6Gl4R_Di8HOiAQuQpT0juXID5VnwZYwyo";
+  const SHEET_NAME = "Penasihat Akademik";
+
+  const ARROW = `<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
+
+  async function load() {
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+    try {
+      const res  = await fetch(url);
+      const text = await res.text();
+      const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+      const rows = json.table.rows;
+
+      // Lajur: A=No, B=Kategori, C=Nama Fail, D=Tarikh, E=Catatan, F=Link
+      const data = rows
+        .map(r => ({
+          nama:   r.c[2]?.v?.toString().trim() || "",
+          tarikh: r.c[3]?.v?.toString().trim() || "",
+          link:   r.c[5]?.v?.toString().trim() || "#",
+        }))
+        .filter(r => r.nama && r.nama.toLowerCase() !== "nama fail");
+
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+      data.forEach((item, i) => {
+        const num = String(i + 1).padStart(2, '0');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="td-no">${num}</td>
+          <td class="td-name">${item.nama}</td>
+          <td class="td-date">${item.tarikh}</td>
+          <td class="td-action">
+            <a href="${item.link}" target="_blank" class="btn-buka">Buka ${ARROW}</a>
+          </td>`;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('countLabel').textContent = data.length + ' borang';
+      document.getElementById('loadingWrap').style.display = 'none';
+      document.getElementById('tableWrap').style.display = 'block';
+    } catch(err) {
+      document.getElementById('loadingWrap').style.display = 'none';
+      document.getElementById('errorWrap').style.display = 'block';
+      console.error(err);
+    }
+  }
+
+  load();
+</script>
+</body>
+</html>
