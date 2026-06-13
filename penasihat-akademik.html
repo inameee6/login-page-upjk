@@ -113,6 +113,17 @@
   const FILE_ICON = `<svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:#cc0001;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`;
   const DL_ICON   = `<svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
 
+  function cleanLink(url) {
+    if (!url || url === "#") return "#";
+    try {
+      const u = new URL(url);
+      let path = u.pathname.replace("/edit", "/view");
+      return u.origin + path;
+    } catch(e) {
+      return url.split("?")[0];
+    }
+  }
+
   function formatDate(raw) {
     if (!raw) return '';
     // Handle Date(2026,0,8) format
@@ -151,7 +162,7 @@
             <div class="file-name">${item.nama}</div>
             <div class="file-meta">Tarikh kuatkuasa: ${item.tarikh}</div>
           </div>
-          <a href="${item.link}" target="_blank" class="btn-muat">${DL_ICON} Muat Turun</a>`;
+          <a href="${cleanLink(item.link)}" target="_blank" class="btn-muat">${DL_ICON} Muat Turun</a>`;
         list.appendChild(div);
       });
 
